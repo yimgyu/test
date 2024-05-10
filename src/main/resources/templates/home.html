@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+    <style>
+        a {
+            color:blue;
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+    <form action="/login" method="post">
+        <table>
+            <tr>
+                <th colspan="2">로그인</th>
+            </tr>
+            <tr>
+                <td align="right">id : </td>
+                <td><input type="text" placeholder="id를 입력해 주세요." name="login_id"></td>
+            </tr>
+            <tr>
+                <td align="right">pw : </td>
+                <td><input type="password" placeholder="pw를 입력해 주세요." name="login_pw"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="right"><button>로그인</button></td>
+            </tr>
+            <tr>
+                <td colspan="2" >아직 회원이 아니라면? <a href="/join">회원가입</a></td>
+            </tr>
+        </table>
+    </form>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        console.log("test2 : ",[[${loginFail}]]);
+        if([[${loginFail}]] == true){
+            alert("id 혹은 pw를 확인해주세요.");
+        }
+        /*]]>*/
+
+        /*<![CDATA[*/
+
+        if([[${join_check}]] == 1){
+            alert("회원가입이 완료되었습니다.");
+        }
+        /*]]>*/
+    </script>
+</body>
+</html>

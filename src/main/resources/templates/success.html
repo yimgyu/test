@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>login_success</title>
+</head>
+<body>
+<span th:text="${session.user_name}"></span>님
+
+<form action="/logout" method="get">
+    <button >로그아웃</button>
+</form>
+</body>
+</html>

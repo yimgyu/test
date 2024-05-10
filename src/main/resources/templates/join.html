@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+</head>
+<body>
+    <form id="joinForm" action="/join" method="post">
+        <table>
+            <tr>
+                <td align="right">id : </td>
+                <td><input id="cust_id" type="text" placeholder="id를 입력해주세요" name="join_id"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="right"><button id="ch_btn1" type="button" onclick="id_check()">ID중복검사</button></td>
+            </tr>
+
+            <tr>
+                <td align="right">pw : </td>
+                <td><input type="password" placeholder="pw를 입력해주세요" name="join_pw"></td>
+            </tr>
+
+            <tr>
+                <td align="right">이름 : </td>
+                <td><input type="text" placeholder="이름를 입력해주세요" name="join_name"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button type="button" onclick="submitForm()"> 회원가입</button></td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script type="text/javascript">
+    function id_check(){
+        let user_id = document.getElementById("cust_id").value;
+
+        $.ajax({
+            url : "/id_check?user_id=" + user_id,
+
+            success : function(result){
+
+                if(result == 1){
+                    alert("존재하는 ID 입니다. 다른 ID를 입력해주세요.");
+                    document.getElementById("cust_id").value = "";
+                }else{
+                    alert("사용가능한 ID 입니다.");
+                    document.getElementById("ch_btn1").id="ch_ok";
+                }
+            },
+            error : function(){
+
+            }
+        });
+    }
+
+    function submitForm() {
+        // 모든 input 요소에 값이 있는지 확인
+        var inputs = document.getElementsByTagName("input");
+        var btn_id = document.getElementById("ch_ok");
+
+        console.log("2 : ", btn_id);
+
+        if(btn_id != null){
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i].value === "") {
+                    alert("모든 항목을 입력해주세요.");
+                    return;
+                }
+            }
+            // 모든 항목이 입력되었으면 폼을 전송
+            document.getElementById("joinForm").submit();
+        }else{
+            alert("ID 중복검사를 해주세요.");
+        }
+    }
+</script>
+</html>
