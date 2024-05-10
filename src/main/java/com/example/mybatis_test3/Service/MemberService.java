@@ -35,7 +35,6 @@ public class MemberService {
 
     public int uuid_check(String uuid){
 
-
         return user_join_mapper.uuid_check(uuid);
     }
 
